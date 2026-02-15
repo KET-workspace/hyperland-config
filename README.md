@@ -10,6 +10,7 @@ Berikut adalah penjelasan singkat tentang struktur file dalam repositori ini:
 .
 ├── hyprland.conf       # File konfigurasi utama Hyprland
 ├── hyprpaper.conf      # Konfigurasi untuk wallpaper
+├── env.conf            # Variabel lingkungan tambahan
 ├── config/
 │   ├── autostart.conf    # Aplikasi yang dijalankan saat startup
 │   ├── decoration.conf   # Pengaturan visual (border, shadow, blur)
@@ -17,9 +18,8 @@ Berikut adalah penjelasan singkat tentang struktur file dalam repositori ini:
 │   ├── monitors.conf     # Pengaturan untuk monitor (resolusi, posisi)
 │   └── windowrules.conf  # Aturan spesifik untuk jendela aplikasi
 └── script/
-    ├── move-to-workspace.sh # Script untuk memindahkan jendela ke workspace
-    ├── startup.sh           # Script kustom untuk startup
-    └── workspace-switcher.sh# Script untuk beralih antar workspace
+    ├── move-to-workspace.sh  # Script untuk memindahkan jendela ke workspace
+    └── workspace-switcher.sh # Script untuk beralih antar workspace
 ```
 
 ## Fitur Utama
@@ -34,7 +34,7 @@ Berikut adalah penjelasan singkat tentang struktur file dalam repositori ini:
 
 ### `hyprland.conf`
 
-File ini adalah titik masuk utama. File ini mengatur variabel lingkungan, mendefinisikan program utama (terminal, file manager), dan memuat semua file konfigurasi lainnya dari direktori `config/`.
+File ini adalah titik masuk utama. File ini mengatur variabel lingkungan, mendefinisikan program utama (terminal, file manager), dan memuat semua file konfigurasi lainnya dari direktori `config/` serta file `env.conf` untuk variabel lingkungan tambahan.
 
 ### `config/keybindings.conf`
 
@@ -60,7 +60,6 @@ Beberapa pintasan keyboard penting:
 
 - **`workspace-switcher.sh`**: Script cerdas yang memungkinkan Anda menggunakan `SUPER + 1` untuk beralih ke workspace 1 jika fokus pada monitor utama, atau ke workspace 6 jika fokus pada monitor kedua.
 - **`move-to-workspace.sh`**: Mirip dengan di atas, tetapi untuk memindahkan jendela aktif ke workspace yang sesuai di monitor yang relevan.
-- **`startup.sh`**: Contoh script yang dapat Anda kembangkan untuk menjalankan aplikasi tertentu saat startup.
 
 ## Instalasi
 
