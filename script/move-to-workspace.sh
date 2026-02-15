@@ -1,35 +1,30 @@
 #!/bin/bash
-# Smart Move to Workspace untuk Hyprland
-# Script ini akan move window ke workspace yang berbeda tergantung monitor yang aktif
-#
-# Usage: ./move-to-workspace.sh <workspace_number>
-# Workspace number: 1-5
-#
-# Ketika fokus di HDMI-A-1: akan move ke workspace 1-5
-# Ketika fokus di DP-1: akan move ke workspace 6-10
+# Smart Move to Workspace untuk Hyprland (Hardcoded Monitor)
+
+source "$(dirname "$0")/../env.conf"
 
 WORKSPACE_NUM=$1
 
-# Validasi input
+# Validasi input (1-5)
 if [ -z "$WORKSPACE_NUM" ] || [ "$WORKSPACE_NUM" -lt 1 ] || [ "$WORKSPACE_NUM" -gt 5 ]; then
     echo "Error: Workspace number harus antara 1-5"
     exit 1
 fi
 
-# Dapatkan monitor yang sedang aktif
+# Dapatkan nama monitor yang sedang aktif (difokuskan)
 ACTIVE_MONITOR=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .name')
 
-# Tentukan workspace ID berdasarkan monitor aktif
-if [ "$ACTIVE_MONITOR" = "HDMI-A-1" ]; then
-    # Monitor utama: workspace 1-5
+# Logika penentuan workspace berdasarkan nama monitor
+if [ "$ACTIVE_MONITOR" = "$mainMonitor" ]; then
+    # Jika di monitor laptop: Workspace 1-5
     TARGET_WORKSPACE=$WORKSPACE_NUM
-elif [ "$ACTIVE_MONITOR" = "DP-1" ]; then
-    # Monitor kedua: workspace 6-10 (offset +5)
+elif [ "$ACTIVE_MONITOR" = "$secondMonitor" ]; then
+    # Jika di monitor eksternal: Workspace 6-10 (offset +5)
     TARGET_WORKSPACE=$((WORKSPACE_NUM + 5))
 else
-    # Fallback ke workspace asli jika monitor tidak dikenal
+    # Fallback: Jika monitor tidak dikenal, gunakan angka asli
     TARGET_WORKSPACE=$WORKSPACE_NUM
 fi
 
-# Move window ke workspace yang ditentukan
+# Eksekusi pindah window ke workspace tujuan
 hyprctl dispatch movetoworkspace $TARGET_WORKSPACE
