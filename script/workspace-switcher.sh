@@ -1,7 +1,11 @@
 #!/bin/bash
 # Smart Workspace Switcher untuk Hyprland (Hardcoded Monitor)
 
-source "$(dirname "$0")/../env.conf"
+ENV_FILE="$(dirname "$0")/../env.conf"
+
+# Baca variabel monitor dari env.conf dengan format Hyprland
+mainMonitor=$(grep '^\$mainMonitor=' "$ENV_FILE" | sed 's/^\$mainMonitor=//' | tr -d ' ')
+secondMonitor=$(grep '^\$secondMonitor=' "$ENV_FILE" | sed 's/^\$secondMonitor=//' | tr -d ' ')
 
 WORKSPACE_NUM=$1
 
@@ -25,6 +29,9 @@ else
     # Fallback jika nama monitor tidak cocok
     TARGET_WORKSPACE=$WORKSPACE_NUM
 fi
+
+# Berpindah ke workspace yang ditentukan
+hyprctl dispatch workspace $TARGET_WORKSPACE
 
 # Berpindah ke workspace yang ditentukan
 hyprctl dispatch workspace $TARGET_WORKSPACE

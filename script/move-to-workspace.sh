@@ -1,7 +1,11 @@
 #!/bin/bash
 # Smart Move to Workspace untuk Hyprland (Hardcoded Monitor)
 
-source "$(dirname "$0")/../env.conf"
+ENV_FILE="$(dirname "$0")/../env.conf"
+
+# Baca variabel monitor dari env.conf dengan format Hyprland
+mainMonitor=$(grep '^\$mainMonitor=' "$ENV_FILE" | sed 's/^\$mainMonitor=//' | tr -d ' ')
+secondMonitor=$(grep '^\$secondMonitor=' "$ENV_FILE" | sed 's/^\$secondMonitor=//' | tr -d ' ')
 
 WORKSPACE_NUM=$1
 
@@ -26,5 +30,14 @@ else
     TARGET_WORKSPACE=$WORKSPACE_NUM
 fi
 
-# Eksekusi pindah window ke workspace tujuan
-hyprctl dispatch movetoworkspace $TARGET_WORKSPACE
+# Pindahkan window ke workspace tujuan tanpa mengubah fokus
+hyprctl dispatch movetoworkspacesilent $TARGET_WORKSPACE
+
+# Kemudian ikuti window dengan beralih ke workspace tersebut di monitor yang sama
+hyprctl dispatch workspace $TARGET_WORKSPACE
+
+# Pindahkan window ke workspace tujuan tanpa mengubah fokus
+hyprctl dispatch movetoworkspacesilent $TARGET_WORKSPACE
+
+# Kemudian ikuti window dengan beralih ke workspace tersebut di monitor yang sama
+hyprctl dispatch workspace $TARGET_WORKSPACE
