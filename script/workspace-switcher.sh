@@ -30,8 +30,5 @@ else
     TARGET_WORKSPACE=$WORKSPACE_NUM
 fi
 
-# Berpindah ke workspace yang ditentukan
-hyprctl dispatch workspace $TARGET_WORKSPACE
-
-# Berpindah ke workspace yang ditentukan
-hyprctl dispatch workspace $TARGET_WORKSPACE
+# Berpindah ke workspace yang ditentukan (sintaks Lua: hl.dsp.focus)
+hyprctl dispatch "hl.dsp.focus({workspace=$TARGET_WORKSPACE})"

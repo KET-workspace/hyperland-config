@@ -30,14 +30,5 @@ else
     TARGET_WORKSPACE=$WORKSPACE_NUM
 fi
 
-# Pindahkan window ke workspace tujuan tanpa mengubah fokus
-hyprctl dispatch movetoworkspacesilent $TARGET_WORKSPACE
-
-# Kemudian ikuti window dengan beralih ke workspace tersebut di monitor yang sama
-hyprctl dispatch workspace $TARGET_WORKSPACE
-
-# Pindahkan window ke workspace tujuan tanpa mengubah fokus
-hyprctl dispatch movetoworkspacesilent $TARGET_WORKSPACE
-
-# Kemudian ikuti window dengan beralih ke workspace tersebut di monitor yang sama
-hyprctl dispatch workspace $TARGET_WORKSPACE
+# Pindahkan window ke workspace tujuan (sintaks Lua: hl.dsp.window.move)
+hyprctl dispatch "hl.dsp.window.move({workspace=$TARGET_WORKSPACE})"
