@@ -1,4 +1,4 @@
--- Port Lua dari hyprland.conf + env.conf
+-- Port Lua dari hyprland.conf
 -- Urutan require = urutan `source =` di hyprland.conf.
 
 local env = require("config.env")
@@ -16,7 +16,7 @@ hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("SDL_VIDEODRIVER", "wayland")
 hl.env("CLUTTER_BACKEND", "wayland")
 
--- env.conf: variabel screenshot & notify
+-- Variabel screenshot & notify
 hl.env("HYPR_SCREENSHOT_TARGET", os.getenv("HOME") .. "/Pictures/Screenshots")
 hl.env("HYPR_NOTIFY_SCRIPT", env.scrPath .. "/notify-send.sh")
 

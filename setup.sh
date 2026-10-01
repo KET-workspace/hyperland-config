@@ -4,7 +4,7 @@
 #
 # check  : cek paket/monitor/wallpaper yang kurang, tanpa mengubah apa pun
 # deps   : install paket yang belum terpasang (Arch/EndeavourOS: pacman + AUR helper)
-# env    : deteksi monitor -> patch config/env.lua + generate env.conf (dipakai script bash)
+# env    : deteksi monitor -> patch config/env.lua (dipakai Lua + script bash)
 
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -101,13 +101,6 @@ ask_monitor() {
 write_env() {
   # env.lua git-ignored; kalau belum ada, buat dari template
   [ -f config/env.lua ] || cp config/env.lua.example config/env.lua
-
-  # env.conf dibaca script bash (workspace/move-to-workspace) via grep
-  cat > env.conf <<EOF
-\$mainMonitor=$MAIN
-\$secondMonitor=$SECOND
-EOF
-  msg "env.conf dibuat (main=$MAIN, second=$SECOND)."
 
   sed -i -E "s|(^[[:space:]]*mainMonitor[[:space:]]*=[[:space:]]*\")[^\"]*(\".*)|\1$MAIN\2|" config/env.lua
   sed -i -E "s|(^[[:space:]]*secondMonitor[[:space:]]*=[[:space:]]*\")[^\"]*(\".*)|\1$SECOND\2|" config/env.lua

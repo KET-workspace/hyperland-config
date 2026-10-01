@@ -10,7 +10,6 @@ Berikut adalah penjelasan singkat tentang struktur file dalam repositori ini:
 .
 ├── hyprland.conf       # File konfigurasi utama Hyprland
 ├── hyprpaper.conf      # Konfigurasi untuk wallpaper
-├── env.conf            # Variabel lingkungan tambahan
 ├── config/
 │   ├── autostart.conf    # Aplikasi yang dijalankan saat startup
 │   ├── decoration.conf   # Pengaturan visual (border, shadow, blur)
@@ -34,7 +33,7 @@ Berikut adalah penjelasan singkat tentang struktur file dalam repositori ini:
 
 ### `hyprland.conf`
 
-File ini adalah titik masuk utama. File ini mengatur variabel lingkungan, mendefinisikan program utama (terminal, file manager), dan memuat semua file konfigurasi lainnya dari direktori `config/` serta file `env.conf` untuk variabel lingkungan tambahan.
+File ini adalah titik masuk utama. File ini mengatur variabel lingkungan, mendefinisikan program utama (terminal, file manager), dan memuat semua file konfigurasi lainnya dari direktori `config/`.
 
 ### `config/keybindings.conf`
 

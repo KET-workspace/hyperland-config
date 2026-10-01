@@ -1,11 +1,11 @@
 #!/bin/bash
 # Smart Move to Workspace untuk Hyprland (Hardcoded Monitor)
 
-ENV_FILE="$(dirname "$0")/../env.conf"
+ENV_FILE="$(dirname "$0")/../config/env.lua"
 
-# Baca variabel monitor dari env.conf dengan format Hyprland
-mainMonitor=$(grep '^\$mainMonitor=' "$ENV_FILE" | sed 's/^\$mainMonitor=//' | tr -d ' ')
-secondMonitor=$(grep '^\$secondMonitor=' "$ENV_FILE" | sed 's/^\$secondMonitor=//' | tr -d ' ')
+# Baca monitor dari config/env.lua (format Lua)
+mainMonitor=$(grep -E '^\s*mainMonitor\s*=' "$ENV_FILE" | sed -E 's/^.*=\s*"([^"]*)".*/\1/')
+secondMonitor=$(grep -E '^\s*secondMonitor\s*=' "$ENV_FILE" | sed -E 's/^.*=\s*"([^"]*)".*/\1/')
 
 WORKSPACE_NUM=$1
 
