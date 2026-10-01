@@ -99,6 +99,9 @@ ask_monitor() {
 }
 
 write_env() {
+  # env.lua git-ignored; kalau belum ada, buat dari template
+  [ -f config/env.lua ] || cp config/env.lua.example config/env.lua
+
   # env.conf dibaca script bash (workspace/move-to-workspace) via grep
   cat > env.conf <<EOF
 \$mainMonitor=$MAIN
